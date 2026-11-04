@@ -1,0 +1,72 @@
+{
+ "features": [
+  "Annual Income (k$)",
+  "Spending Score (1-100)"
+ ],
+ "mean": [
+  60.56,
+  50.2
+ ],
+ "scale": [
+  26.19897707926781,
+  25.7588819633151
+ ],
+ "centers": [
+  [
+   -0.20091256569971444,
+   -0.026456174707117586
+  ],
+  [
+   0.9915830476839198,
+   1.2395027537948333
+  ],
+  [
+   -1.329545316496027,
+   1.1321778796599242
+  ],
+  [
+   1.0550030223077878,
+   -1.2844390658272284
+  ],
+  [
+   -1.3075186893850437,
+   -1.1369653606646668
+  ]
+ ],
+ "names": {
+  "0": "Balanced middle",
+  "1": "High earners, big spenders",
+  "2": "Spending more than earning",
+  "3": "High-income savers",
+  "4": "Careful on a small income"
+ },
+ "tips": {
+  "0": "Set up an automatic transfer of 10-20% of income on payday.",
+  "1": "Pay yourself first: move money to savings before you spend.",
+  "2": "Track spending and build an emergency fund before anything else.",
+  "3": "Already saving well: compare fixed deposits, bonds and funds.",
+  "4": "Start small and regular, e.g. a little every day or week."
+ },
+ "profile": {
+  "0": [
+   55.3,
+   49.5
+  ],
+  "1": [
+   86.5,
+   82.1
+  ],
+  "2": [
+   25.7,
+   79.4
+  ],
+  "3": [
+   88.2,
+   17.1
+  ],
+  "4": [
+   26.3,
+   20.9
+  ]
+ }
+}

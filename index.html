@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Savings</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>💰 Smart Savings</h1>
+    <p class="caption">ICT336 workshop. Data from Kaggle, for teaching only, not financial advice.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" class="tab active" data-tab="deposit">🏦 Fixed deposit</button>
+    <button role="tab" class="tab" data-tab="group">👥 Saver group</button>
+    <button role="tab" class="tab" data-tab="about">ℹ️ About the models</button>
+  </nav>
+
+  <p id="loading" class="note">Loading the models…</p>
+
+  <!-- TAB 1: supervised model -->
+  <section id="deposit" class="panel active">
+    <h2>Will this customer open a fixed deposit if the bank calls?</h2>
+    <form id="deposit-form" class="grid">
+      <div class="col">
+        <label>Age <output id="age-out">40</output><input type="range" id="age" min="17" max="98" value="40"></label>
+        <label>Job <select id="job"></select></label>
+        <label>Marital status <select id="marital"></select></label>
+        <label>Education <select id="education"></select></label>
+        <label>Has unpaid credit (default)? <select id="default"></select></label>
+        <label>Has a home loan? <select id="housing"></select></label>
+      </div>
+      <div class="col">
+        <label>Has a personal loan? <select id="loan"></select></label>
+        <label>Calls in this campaign <output id="campaign-out">2</output><input type="range" id="campaign" min="1" max="20" value="2"></label>
+        <label>Calls in earlier campaigns <output id="previous-out">0</output><input type="range" id="previous" min="0" max="7" value="0"></label>
+        <label>Result of the last campaign <select id="poutcome"></select></label>
+        <label>Market interest rate (Euribor 3 months, %) <output id="euribor3m-out">4.9</output><input type="range" id="euribor3m" min="0.6" max="5.1" step="0.1" value="4.9"></label>
+      </div>
+    </form>
+    <button id="predict" class="primary" disabled>Predict</button>
+    <div id="deposit-result" class="result" hidden>
+      <p class="metric-label">Chance of opening a fixed deposit</p>
+      <p class="metric" id="chance"></p>
+      <div class="bar"><div id="chance-bar"></div></div>
+      <p id="advice" class="advice"></p>
+    </div>
+  </section>
+
+  <!-- TAB 2: unsupervised model -->
+  <section id="group" class="panel">
+    <h2>Which group of customers is this person like?</h2>
+    <div class="grid">
+      <label>Annual income (thousand $) <output id="income-out">60</output><input type="range" id="income" min="15" max="140" value="60"></label>
+      <label>Spending score (1 = spends little, 100 = spends a lot) <output id="spending-out">50</output><input type="range" id="spending" min="1" max="100" value="50"></label>
+    </div>
+    <button id="find" class="primary" disabled>Find group</button>
+    <div id="group-result" hidden>
+      <p class="advice success" id="group-name"></p>
+      <p class="advice info" id="group-tip"></p>
+      <p>Average customer in each group (this person is the last row):</p>
+      <table id="profile"></table>
+      <p>All 200 customers, coloured by group:</p>
+      <svg id="chart" viewBox="0 0 640 400" role="img" aria-label="Scatter chart of income and spending score"></svg>
+      <div id="legend" class="legend"></div>
+    </div>
+  </section>
+
+  <!-- TAB 3: about -->
+  <section id="about" class="panel">
+    <h2>1. Fixed deposit model (supervised)</h2>
+    <p>Trained on 32,950 past calls with the answer (opened a fixed deposit or not).
+      Only 11% said yes, so we chose the model by F1, not accuracy.
+      Best model: <b id="model-name"></b>. Scores on 8,238 test calls:</p>
+    <table id="scores"></table>
+    <p class="caption">Data: Kaggle, Bank Marketing (henriqueyamahata/bank-marketing).</p>
+    <h2>2. Saver-group model (unsupervised)</h2>
+    <p>K-Means found 5 groups in 200 customers using income and spending, with no answer column.
+      We looked at the averages and gave each group a name and a savings tip:</p>
+    <table id="sizes"></table>
+    <p class="caption">Data: Kaggle, Mall Customer Segmentation Data (vjchoudhary7/customer-segmentation-tutorial-in-python).</p>
+    <p class="caption">The models were trained with scikit-learn in Google Colab, then exported to JSON so this page can run them in the browser.</p>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
